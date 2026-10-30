@@ -1,0 +1,185 @@
+/* ========= إعدادات عامة ========= */
+:root {
+  --accent: #c9a96e;          /* لون التوهج – غيّره كما تحب */
+  --card-bg: rgba(10, 10, 10, 0.30);
+  --text: #f2f2f2;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html { background: #000; }   /* الأسود على html فقط، حتى لا يغطي الفيديو */
+
+html, body {
+  height: 100%;
+  color: var(--text);
+  font-family: "Segoe UI", Tahoma, "Noto Sans Arabic", sans-serif;
+  overflow: hidden;
+}
+
+/* ========= الخلفية ========= */
+#bg-video {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;   /* يملأ الشاشة بدون تشويه */
+  z-index: -2;
+}
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.15);
+  z-index: -1;
+}
+
+/* ========= شاشة الدخول ========= */
+#enter-screen {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  background: #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: opacity 0.8s ease, visibility 0.8s;
+}
+#enter-screen.leave { opacity: 0; visibility: hidden; }
+#enter-text {
+  font-size: 1.4rem;
+  letter-spacing: 2px;
+  color: #fff;
+  animation: blink 2s infinite;
+}
+@keyframes blink { 50% { opacity: 0.35; } }
+
+/* ========= البطاقة ========= */
+main {
+  position: fixed;
+  inset: 0;
+  margin: auto;
+  width: min(92vw, 420px);
+  height: fit-content;
+  padding: 36px 28px 28px;
+  background: var(--card-bg);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 22px;
+  box-shadow: 0 0 40px rgba(0, 0, 0, 0.6), 0 0 25px -8px var(--accent);
+  text-align: center;
+  transition: opacity 1s ease, transform 1s ease;
+}
+main.hidden { opacity: 0; transform: translateY(24px) scale(0.97); pointer-events: none; }
+.hidden { display: none; }
+main.hidden { display: block; }  /* البطاقة تبقى موجودة لكن شفافة */
+
+/* عدد الزيارات */
+.views {
+  position: absolute;
+  top: 14px;
+  left: 16px;
+  display: flex;
+  gap: 6px;
+  align-items: center;
+  font-size: 0.85rem;
+  opacity: 0.75;
+}
+
+/* الصورة الشخصية */
+.avatar {
+  width: 110px;
+  height: 110px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid rgba(255, 255, 255, 0.35);
+  box-shadow: 0 0 22px var(--accent);
+}
+
+/* الاسم بتوهج */
+.username {
+  margin-top: 14px;
+  font-size: 1.9rem;
+  font-weight: 700;
+  text-shadow: 0 0 10px var(--accent), 0 0 24px var(--accent);
+}
+
+/* النبذة (تكتب حرفًا حرفًا) */
+.bio {
+  margin-top: 8px;
+  min-height: 1.5em;
+  font-size: 1rem;
+  opacity: 0.9;
+}
+.bio::after { content: "|"; margin-right: 2px; animation: blink 0.9s infinite; }
+
+/* روابط التواصل */
+.socials {
+  margin-top: 22px;
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+}
+.socials a {
+  width: 50px;
+  height: 50px;
+  display: grid;
+  place-items: center;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: transform 0.25s, box-shadow 0.25s, background 0.25s;
+}
+.socials a:hover {
+  transform: translateY(-4px) scale(1.08);
+  background: rgba(255, 255, 255, 0.16);
+  box-shadow: 0 6px 20px -4px var(--accent);
+}
+
+/* ========= بطاقة Discord ========= */
+.discord-card {
+  margin-top: 22px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 12px 14px;
+  text-align: right;
+  background: rgba(0, 0, 0, 0.35);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 14px;
+}
+.discord-card.hidden { display: none; }
+.dc-avatar-wrap { position: relative; width: 52px; height: 52px; flex-shrink: 0; }
+.dc-avatar-wrap img { width: 100%; height: 100%; border-radius: 50%; }
+.status {
+  position: absolute;
+  bottom: -2px;
+  right: -2px;
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  border: 3px solid #1a1a1a;
+}
+.status.online  { background: #23a559; }
+.status.idle    { background: #f0b232; }
+.status.dnd     { background: #f23f43; }
+.status.offline { background: #80848e; }
+.dc-name { font-weight: 700; }
+.dc-activity { font-size: 0.85rem; opacity: 0.75; margin-top: 2px; direction: ltr; text-align: right; }
+
+/* ========= التحكم بالصوت ========= */
+.player {
+  margin-top: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+#mute-btn { background: none; border: none; font-size: 1.3rem; cursor: pointer; }
+#volume { width: 130px; accent-color: var(--accent); cursor: pointer; }
+
+/* ========= موبايل ========= */
+@media (max-width: 480px) {
+  .username { font-size: 1.6rem; }
+  .avatar { width: 92px; height: 92px; }
+}

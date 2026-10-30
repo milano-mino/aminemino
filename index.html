@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>milano_mino</title>
+  <meta name="description" content="My personal page" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- شاشة "اضغط للدخول" (ضرورية لأن المتصفح يمنع تشغيل الصوت تلقائيًا) -->
+  <div id="enter-screen">
+    <span id="enter-text">اضغط في أي مكان للدخول</span>
+  </div>
+
+  <!-- الخلفية المتحركة + الأغنية (الصوت داخل الفيديو نفسه) -->
+  <video id="bg-video" src="assets/background.mp4" loop playsinline preload="auto"></video>
+  <div class="overlay"></div>
+
+  <!-- المحتوى الرئيسي -->
+  <main id="card" class="hidden">
+
+    <div class="views" title="عدد الزيارات">
+      <svg viewBox="0 0 24 24" width="16" height="16"><path fill="currentColor" d="M12 5c-5 0-9 4.5-10 7 1 2.5 5 7 10 7s9-4.5 10-7c-1-2.5-5-7-10-7Zm0 11a4 4 0 1 1 0-8 4 4 0 0 1 0 8Zm0-6a2 2 0 1 0 0 4 2 2 0 0 0 0-4Z"/></svg>
+      <span id="view-count">0</span>
+    </div>
+
+    <img id="avatar" class="avatar" src="assets/avatar.png" alt="avatar"
+         onerror="this.onerror=null;this.style.visibility='hidden'" />
+
+    <h1 id="username" class="username">milano_mino</h1>
+    <p id="bio" class="bio"></p>
+
+    <!-- روابط الحسابات -->
+    <div class="socials">
+      <a  id="discord-link" href="https://discord.com/users/1527014351406497906" target="_blank" rel="noopener" title="Discord">
+        <img src="https://cdn.simpleicons.org/discord/ffffff" width="26" height="26" alt="Discord" />
+      </a>
+      <a href="https://www.tiktok.com/@YMino" target="_blank" rel="noopener" title="TikTok">
+        <img src="https://cdn.simpleicons.org/tiktok/ffffff" width="26" height="26" alt="TikTok" />
+      </a>
+      <a href="https://www.instagram.com/X.Mino.Black target="_blank" rel="noopener" title="Instagram">
+        <img src="https://cdn.simpleicons.org/instagram/ffffff" width="26" height="26" alt="Instagram" />
+      </a>
+    </div>
+
+    <!-- بطاقة Discord الحية (تظهر فقط إذا فعّلت Lanyard) -->
+    <div id="discord-card" class="discord-card hidden">
+      <div class="dc-avatar-wrap">
+        <img id="dc-avatar" src="" alt="" />
+        <span id="dc-status" class="status offline"></span>
+      </div>
+      <div class="dc-info">
+        <div id="dc-name" class="dc-name"></div>
+        <div id="dc-activity" class="dc-activity"></div>
+      </div>
+    </div>
+
+    <!-- التحكم بالصوت -->
+    <div class="player">
+      <button id="mute-btn" aria-label="mute">🔊</button>
+      <input id="volume" type="range" min="0" max="1" step="0.01" value="0.5" />
+    </div>
+
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
